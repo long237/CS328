@@ -7,7 +7,7 @@ public class lab2 {
         System.out.println("Please enter a number: ");
 
         int n = scanner.nextInt();
-        int result = squareRoot(n);
+        int result = squareRoot2(n);
         System.out.println("This is the square root: " + result);
 
         /**The start of part 2 **/
@@ -111,6 +111,40 @@ public class lab2 {
             }
         }
         return -1;      //return -1 if error
+    }
+
+    public static int squareRoot2(int number) {
+        int guessNum = number / 2;
+        int rightBound = number;
+        int leftBound = 0;
+        //int guessNum = 0;
+        int guessSq;
+
+        while (leftBound < rightBound) {
+            guessSq = guessNum * guessNum;
+            if (guessSq > number) {             //update right bound if guess ^ 2 > number
+                rightBound = guessNum - 1;
+            }
+            else if (guessSq < number) {        //Update left bound if guess ^ 2 < number
+                leftBound = guessNum + 1;
+            }
+            else {
+                return guessNum;                //Exact value of square root
+            }
+            guessNum = ((rightBound - leftBound) / 2) + leftBound;      //Find the middle value in the range
+        }
+
+        guessSq = guessNum * guessNum;          //Calculate the square of the very last value in  the range
+        if (guessSq >= number) {
+            System.out.println("Larger number statement execute");
+            return  guessNum;
+        }
+        else if (guessSq < number){
+            System.out.println("Smaller number statement execute");
+            return guessNum + 1;
+        }
+        //return -1 if run into an error
+        return -1;
     }
 
     public static int findMissing(int[] sortedArray) {
