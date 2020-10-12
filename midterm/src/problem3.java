@@ -1,18 +1,29 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class problem3 {
     public static void main(String[] args) {
 
-        int[] a = new int[8];
-        a[0] = 6;
-        a[1] = 0;
-        a[2] = 1;
-        a[3] = 5;
-        a[4] = 1;
-        a[5] = 1;
-        a[6] = 4;
-        a[7] = 5;
+        int n = ThreadLocalRandom.current().nextInt(0, 25);
+        int[] a = new int[n];
+
+        for (int i = 0; i < a.length; i++) {
+            a[i] = ThreadLocalRandom.current().nextInt(0, n);
+        }
+
+//        System.out.println("This is the random array: ");
+//        System.out.println(Arrays.toString(a));
+
+        int[] a1 = new int[8];
+        a1[0] = 6;
+        a1[1] = 0;
+        a1[2] = 1;
+        a1[3] = 5;
+        a1[4] = 1;
+        a1[5] = 1;
+        a1[6] = 4;
+        a1[7] = 5;
 
         int[] a2 = new int[9];
         a2[0] = 0;
@@ -44,11 +55,16 @@ public class problem3 {
         a4[3] = 3;
         a4[4] = 4;
 
+        int[] a5 = new int[1];
+        a5[0] = 2;
 
-        int[] tarray = a3;
-        int n = tarray.length;
+        int[] tarray = a;
+        int arraySize = tarray.length;
         int[] repa = new int[n];
         ArrayList<Integer> posMode = new ArrayList<Integer>();
+
+        System.out.println("Test array value: ");
+        System.out.println(Arrays.toString(tarray) + "\n");
 
         /**Count the number of duplicates and increment the approriate index by 1 **/
         for (int i = 0; i < tarray.length; i++) {
@@ -62,17 +78,16 @@ public class problem3 {
             posMode.add(cmode);
         }
         for (int j = 1; j < repa.length; j++) {
-            System.out.println("Current mode: " + cmode);
-            if(repa[cmode] < repa[j]) {
-                cmode = j;
+            //System.out.println("Current mode: " + cmode);
+            if((repa[cmode] < repa[j]) && (repa[j] > 1)){       //Add the new element only if it is larger then the
+                cmode = j;                                      //current one and the has more than 1 repitition
                 posMode.clear();
                 posMode.add(j);
             }
             else if( (repa[cmode] == repa[j]) && (repa[j] > 1)){
-            //else if(repa[cmode] == repa[j]){
                 posMode.add(j);
             }
-            System.out.println("Mode in for loop: " + posMode);
+            //System.out.println("Mode in for loop: " + posMode);
         }
 
 
