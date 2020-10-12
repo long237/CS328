@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class problem2 {
     public static void main(String[] args) {
 
-        //Random double array and a random key to run the program. 
+        //Random double array and a random key to run the program.
         int n = ThreadLocalRandom.current().nextInt(1, 15);
         double[] a = new double[n];
 
@@ -71,6 +71,8 @@ public class problem2 {
         double key = -2.88;
         double[] ar = tar4;
         int keyIndex = binarySearch(ar, key);         //Call binary search function
+        System.out.println("The given array to run: ");
+        System.out.println(Arrays.toString(ar));
         System.out.println("The index of the key is: " + keyIndex);
 
         if(keyIndex == -1) {
@@ -101,7 +103,7 @@ public class problem2 {
 
         while (start <= end) {
             if (ar[mid] == key) {
-                System.out.println("Found the index line execute \n");
+                //System.out.println("Found the index line execute \n");
                 return mid;
             }
             else if(ar[mid] > key) {
@@ -112,7 +114,7 @@ public class problem2 {
             }
             mid = (start + end) / 2;
         }
-        System.out.println("Error Line execute \n");
+        //System.out.println("Error Line execute \n");
         return -1;      /** Elements is not found **/
     }
 }
