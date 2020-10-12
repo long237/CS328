@@ -1,5 +1,24 @@
+import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class problem2 {
     public static void main(String[] args) {
+
+        //Random double array and a random key to run the program. 
+        int n = ThreadLocalRandom.current().nextInt(1, 15);
+        double[] a = new double[n];
+
+        for (int i = 0; i < a.length; i++) {
+            a[i] = Math.round(ThreadLocalRandom.current().nextDouble(-15.0, 15.0) * 100.0) / 100.0;
+        }
+        int randomIndex = ThreadLocalRandom.current().nextInt(0, a.length);
+        double randomKey = a[randomIndex];
+        System.out.println("Random double array: " );
+        System.out.println(Arrays.toString(a));
+        Arrays.sort(a);
+        System.out.println("Array after sort: " );
+        System.out.println(Arrays.toString(a));
+
         double[] tar1 = new double[9];
         tar1[0] = 0;
         tar1[1] = 1;
@@ -33,7 +52,7 @@ public class problem2 {
         tar4[0] = -10.12;
         tar4[1] = -5;
         tar4[2] = -2.88;
-        tar4[3] = -1;
+        tar4[3] = -2.88;
         tar4[4] = 5;
         tar4[5] = 7;
         tar4[6] = 9;
@@ -49,8 +68,8 @@ public class problem2 {
 
 
 
-        double key = 2;
-        double[] ar = tar1;
+        double key = -2.88;
+        double[] ar = tar4;
         int keyIndex = binarySearch(ar, key);         //Call binary search function
         System.out.println("The index of the key is: " + keyIndex);
 
