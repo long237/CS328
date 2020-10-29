@@ -45,18 +45,22 @@ public class lab3src {
         ta6[1] = 2;
         ta6[2] = 6;
 
-        int[] ta7 = new int[6];
-        ta7[0] = 4;
-        ta7[1] = 2;
-        ta7[2] = 0;
-        ta7[3] = 10;
-        ta7[4] = 1;
-        ta7[5] = 6;
+        int[] ta7 = new int[8];
+        ta7[0] = 2;
+        ta7[1] = 6;
+        ta7[2] = 8;
+        ta7[3] = -5;
+        ta7[4] = -1;
+        ta7[5] = 0;
+        ta7[6] = 9;
+        ta7[7] = 10;
 
 
-        int[] inArray = ta5;
-        int k = 1;
+        int[] inArray = ta7;
+        int k = 7;
         Scanner scanner = new Scanner(System.in);
+
+        /**Part A**/
         System.out.println("Enter a number to generate the array size: ");
         int n = scanner.nextInt();
         int[] userAr = new int[n];
@@ -79,15 +83,12 @@ public class lab3src {
         System.out.println();
 
         /**Part B**/
-        int maxNum = 5;
+        //int maxNum = 5;
+        System.out.println("Input a number to find max k numbers: ");
+        int maxNum = scanner.nextInt();
         int prevIndex = userAr.length - maxNum;
         int eleIdx = Quick_Select(userAr, 0, userAr.length - 1, prevIndex);
         ArrayList<Integer> maxNumAr = new ArrayList<Integer>();
-
-//        System.out.println("After second QS: " + Arrays.toString(userAr));
-//        for(int i = (eleIdx + 1); i < userAr.length; i++ ){
-//            System.out.println(userAr[i]);
-//        }
 
         System.out.println("After second QS: " + Arrays.toString(userAr));
         for(int i = (eleIdx + 1); i < userAr.length; i++ ){
@@ -97,27 +98,6 @@ public class lab3src {
         System.out.println("Max " + maxNum + " numbers");
         System.out.println("Max num arrays: ");
         System.out.println(maxNumAr);
-
-
-//        System.out.println("Input Array: " + Arrays.toString(inArray));
-//        int piv_idx = partition(inArray, 0, inArray.length - 1);
-//        System.out.println();
-//        System.out.println("Array after partition: " + Arrays.toString(inArray));
-//        System.out.println();
-//        System.out.println("Pivot Index: " + piv_idx);
-
-//        System.out.println("Input Array: " + Arrays.toString(inArray));
-//        System.out.println("K value: " + k);
-//        int pivIdx = Quick_Select(inArray, 0, inArray.length - 1, k);
-//
-//        System.out.println("Array after partition: " + Arrays.toString(inArray));
-//        System.out.println();
-//        System.out.println("K element Index: " + pivIdx);
-//        System.out.println();
-//        System.out.println("Value of element k: " + inArray[pivIdx]);
-
-
-
 
     }
 
@@ -129,10 +109,6 @@ public class lab3src {
         int pivot = a[leftBound];           //Pick the first element of the given array using which is left bound
         int left = leftBound;
         int right = rightBound;
-//        System.out.println("Pivot: " + pivot);
-//        System.out.println("Part left bound: " + left);
-//        System.out.println("Part right bound: " + right);
-
         //Swapping pivot with last element
 
         while (left <= right) {
@@ -147,8 +123,6 @@ public class lab3src {
                 a[left] = a[right];
                 a[right] = prevLeft;
             }
-            //System.out.println("left bound: " + left);
-            //System.out.println("right bound: " +right);
         }
         if (a.length == 1) {
             System.out.println("Array of size 1: ");
@@ -157,7 +131,6 @@ public class lab3src {
         else if (a.length > 1) {
             a[leftBound] = a[left -1];
             a[left -1] = pivot;
-//            System.out.println("Pivot index: " + (left -1));
             return (left -1);
         }
         System.out.println("Encounter error");
@@ -172,22 +145,14 @@ public class lab3src {
         }
 
         else if(pivIndex + 1 > k) {         //Call the function on the left size from beginning to pivot
-//            System.out.println("Input array to left: " + Arrays.toString(a));
-//            //System.out.println("Pivot Index left: " + pivIndex);
-//            System.out.println("Checking left with bounds: (" + left + "," + (pivIndex - 1) + ")");
-//            System.out.println();
             return Quick_Select(a, left, pivIndex - 1, k);
         }
 
         //else {
         else if(pivIndex + 1 < k) {         //Call the function on the right size from pivot to the end
-//            System.out.println("Input array to right: " + Arrays.toString(a));
-//            //System.out.println("Pivot Index right: " + pivIndex);
-//            System.out.println("Checking right with bounds: (" + (pivIndex + 1) + "," + right + ")");
-//            System.out.println();
             return Quick_Select(a, pivIndex + 1, right, k);
         }
-        System.out.println("Quick Select return error");
+        //System.out.println("Quick Select return error");
         return -1;
     }
 }
