@@ -31,6 +31,9 @@ public class lab4src {
         ta3[5] = 2;
         ta3[6] = 32;
 
+        int[] ta4 = new int[1];
+        ta4[0] = -1;
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Input an n value: ");
@@ -44,8 +47,10 @@ public class lab4src {
         System.out.println("Enter a k value: ");
         int k = scanner.nextInt();
 
-        int[] result = ClosetK(inputAr, k);
-        System.out.println("Result value in main: " + Arrays.toString(result));
+        //int[] result = ClosetK(inputAr, k);
+        ArrayList<Integer> result = ClosetK(inputAr, k);
+        System.out.println("");
+        System.out.println("Result value in main: " + result);
 
         //System.out.println("Value of k: " + k);
 //        int median = Quick_Select(inputAr, 0, inputAr.length - 1, (inputAr.length / 2) + 1, 0);
@@ -55,8 +60,15 @@ public class lab4src {
 //        System.out.println();
     }
 
-    public static int[] ClosetK (int[] a, int k) {
+    //public static int[] ClosetK (int[] a, int k) {
+    public static ArrayList<Integer> ClosetK (int[] a, int k) {
         //Find median of the array
+        if(a.length == 1) {
+            ArrayList<Integer> ar1 = new ArrayList<Integer>();
+            ar1.add(a[0]);
+            return ar1;
+        }
+        //k in the parameter in quick sort will be out of bound for array length of 1.
         int median = Quick_Select(a, 0, a.length -1, (a.length / 2) + 1,0);
         System.out.println("Array after QS: " + Arrays.toString(a));
         System.out.println("Median index: " + median);
@@ -77,13 +89,13 @@ public class lab4src {
         //Save all value to the left of the k + 1 element to an array and add the median value to readjust
         int[] closetNum = new int[k + 1];
         ArrayList<Integer> closeDi = new ArrayList<Integer>();
-        for(int i = 0; i <= lastCloset; i++) {
-            closetNum[i] = diff[i];
-        }
-        System.out.println("Closet num diff: " + Arrays.toString(closetNum));
-        for(int i = 0; i <= lastCloset; i++) {
-            closetNum[i] = diff[i] + a[median];
-        }
+//        for(int i = 0; i <= lastCloset; i++) {
+//            closetNum[i] = diff[i];
+//        }
+//        System.out.println("Closet num diff: " + Arrays.toString(closetNum));
+//        for(int i = 0; i <= lastCloset; i++) {
+//            closetNum[i] = diff[i] + a[median];
+//        }
         for(int i = 0; i <= lastCloset; i++) {              //Arrays list to not include the median
             if(diff[i] != 0){
                 closeDi.add(diff[i] + a[median]);
@@ -91,7 +103,7 @@ public class lab4src {
         }
         //System.out.println("Closet numbers: " + Arrays.toString(closetNum));
         System.out.println("No pivot: " + closeDi);
-        return closetNum;
+        return closeDi;
     }
 
     public static int partition(int[] a, int leftBound, int rightBound, int flag) {      //return the index of the pivot
