@@ -52,12 +52,6 @@ public class lab4src {
         System.out.println("");
         System.out.println("Result value in main: " + result);
 
-        //System.out.println("Value of k: " + k);
-//        int median = Quick_Select(inputAr, 0, inputAr.length - 1, (inputAr.length / 2) + 1, 0);
-//        System.out.println("Array after QS: " + Arrays.toString(inputAr));
-//        System.out.println("Median index: " + median);
-//        System.out.println("Median value: " + inputAr[median]);
-//        System.out.println();
     }
 
     //public static int[] ClosetK (int[] a, int k) {
@@ -70,8 +64,8 @@ public class lab4src {
         }
         //k in the parameter in quick sort will be out of bound for array length of 1.
         int median = Quick_Select(a, 0, a.length -1, (a.length / 2) + 1,0);
-        System.out.println("Array after QS: " + Arrays.toString(a));
-        System.out.println("Median index: " + median);
+//        System.out.println("Array after QS: " + Arrays.toString(a));
+//        System.out.println("Median index: " + median);
         System.out.println("Median value: " + a[median]);
 
         //Calculate the distance between all values relative to the median
@@ -79,30 +73,18 @@ public class lab4src {
         for (int i = 0; i < a.length; i++) {
             diff[i] = a[i] - a[median];
         }
-        System.out.println();
-        System.out.println("Diff array: " + Arrays.toString(diff));
 
         //Find the k + 1 smallest element in the difference array.
         int lastCloset = Quick_Select(diff, 0, diff.length - 1, k + 1, 1);
-        System.out.println("Last closet: " + lastCloset);
 
         //Save all value to the left of the k + 1 element to an array and add the median value to readjust
         int[] closetNum = new int[k + 1];
         ArrayList<Integer> closeDi = new ArrayList<Integer>();
-//        for(int i = 0; i <= lastCloset; i++) {
-//            closetNum[i] = diff[i];
-//        }
-//        System.out.println("Closet num diff: " + Arrays.toString(closetNum));
-//        for(int i = 0; i <= lastCloset; i++) {
-//            closetNum[i] = diff[i] + a[median];
-//        }
         for(int i = 0; i <= lastCloset; i++) {              //Arrays list to not include the median
             if(diff[i] != 0){
                 closeDi.add(diff[i] + a[median]);
             }
         }
-        //System.out.println("Closet numbers: " + Arrays.toString(closetNum));
-        System.out.println("No pivot: " + closeDi);
         return closeDi;
     }
 

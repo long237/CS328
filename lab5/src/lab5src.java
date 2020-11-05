@@ -1,9 +1,12 @@
+import java.sql.SQLOutput;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class lab5src {
     public static void main(String[] args) {
 
-        int[] ta1 = new int[9];     //for building
+        int[] ta1 = new int[9];     //for building and sorting
         ta1[0] = 21;
         ta1[1] = 0;
         ta1[2] = 1;
@@ -37,7 +40,7 @@ public class lab5src {
         ta3[7] = 5;
         ta3[8] = 36;
 
-        int[] ta4 = new int[10];
+        int[] ta4 = new int[10];        //for building sorting
         ta4[0] = 87;
         ta4[1] = 21;
         ta4[2] = 0;
@@ -49,7 +52,7 @@ public class lab5src {
         ta4[8] = -3;
         ta4[9] = 10;
 
-        int[] ta5 = new int[10];
+        int[] ta5 = new int[10];    //for building
         ta5[0] = 0;
         ta5[1] = 20;
         ta5[2] = 11;
@@ -60,48 +63,114 @@ public class lab5src {
         ta5[7] = 5;
         ta5[8] = 18;
         ta5[9] = 19;
-        int[] inputAr = ta5;
+
+
+        int[] ta6 = new int[5];
+        ta6[0] = 5;
+        ta6[1] = 2;
+        ta6[2] = 1;
+        ta6[3] = 6;
+        ta6[4] = 4;
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter an arrays size: ");
+        int n = scanner.nextInt();
+
+        int[] user_ar = new int[n];
+        for (int i = 0; i < n; i++){
+            user_ar[i] = ThreadLocalRandom.current().nextInt(-100, 101);
+        }
+
+        int[] inputAr = user_ar;
+
+        //Test max_heapify()
 //        System.out.println("Before max_heapify: " + Arrays.toString(inputAr));
 //        swap(inputAr, 0, inputAr.length - 1);
-//        max_heapify(inputAr, 0);
+//        max_heapify(inputAr, 0, inputAr.length);
 //        System.out.println("After max_heapify: " + Arrays.toString(inputAr));
 
         //System.out.println("");
-        System.out.println("Before build: " + Arrays.toString(inputAr));
-        build_MaxHeap(inputAr);
-        System.out.println("After build: " + Arrays.toString(inputAr));
+        //Build max heap
+//        System.out.println("Before build: " + Arrays.toString(inputAr));
+//        build_MaxHeap(inputAr);
+//        System.out.println("After build: " + Arrays.toString(inputAr));
 
-//        System.out.println("Before swap: " + Arrays.toString(ta2));
-//        swap(ta2, 1, 3);
-//        System.out.println("After swap: " + Arrays.toString(ta2));
+        //Sort an array using max_heapify
 
+        //Part A:
+        //Heap sort run time section
+        long startTime = System.nanoTime();
+        heap_Sort(inputAr);
+        long endTime = System.nanoTime();
+        long heapSortTime = endTime - startTime;
+        System.out.println("Average run time heap sort: " + heapSortTime + " nanosecond");
+
+        //Selection sort run time
+        for (int i = 0; i < n; i++){
+            user_ar[i] = ThreadLocalRandom.current().nextInt(-100, 101);
+        }
+        startTime = System.nanoTime();
+        selection_Sort(inputAr);
+        endTime = System.nanoTime();
+        long selectionTime = endTime - startTime;
+        System.out.println("Average run time selection: " + selectionTime + " nanosecond");
+
+        //Part B:
+        int[] a = new int[10];
+        for (int i = 0; i < a.length; i++){
+            a[i] = ThreadLocalRandom.current().nextInt(-100, 101);
+        }
+        System.out.println("Before sort: " + Arrays.toString(a));
+        heap_Sort(a);
+        System.out.println("After sort: " + Arrays.toString(a));
     }
 
-    public static void max_heapify(int[] a, int i){
+    public static void max_heapify(int[] a, int i, int rightBound){
         int max = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
 
-        System.out.println("Max: " + max);
-        System.out.println("left: " + left);
-        System.out.println("right: " + right);
+//        System.out.println("Max: " + max);
+//        System.out.println("left: " + left);
+//        System.out.println("right: " + right);
         //Check to see if left child exist and compare with max value
-        if((left < a.length) && (a[max] < a[left])){
+        if((left < rightBound) && (a[max] < a[left])){
             max = left;
         }
-        if((right < a.length) && (a[max] < a[right])){
+        if((right < rightBound) && (a[max] < a[right])){
             max = right;
         }
         if(max != i) {
             swap(a, i, max);
-            max_heapify(a, max);            //Call new heapify on the new position
+            max_heapify(a, max, rightBound);            //Call new heapify on the new position
         }
     }
 
     public static void build_MaxHeap(int[]a){
         int lastInter = (a.length / 2) - 1;
         for(int i = lastInter; i >= 0; i--){
-            max_heapify(a, i);
+            max_heapify(a, i, a.length);
+        }
+    }
+
+    public static void heap_Sort(int[] a){
+        build_MaxHeap(a);
+
+        for(int i = a.length - 1; i > 0; i--){
+            swap(a, 0, i);
+            max_heapify(a, 0, i);       //Keep calling max heapify on the root to sort
+        }
+    }
+
+    public static void selection_Sort(int[] a) {
+        for (int i = 0; i < a.length; i++) {
+            int min = i;                            //The index of the smallest number
+            for(int j = i; j < a.length; j++){
+                if( a[j] <= a[min]){
+                    min = j;
+                }
+            }
+            swap(a, i, min);
         }
     }
 
