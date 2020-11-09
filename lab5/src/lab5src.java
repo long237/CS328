@@ -83,20 +83,6 @@ public class lab5src {
 
         int[] inputAr = user_ar;
 
-        //Test max_heapify()
-//        System.out.println("Before max_heapify: " + Arrays.toString(inputAr));
-//        swap(inputAr, 0, inputAr.length - 1);
-//        max_heapify(inputAr, 0, inputAr.length);
-//        System.out.println("After max_heapify: " + Arrays.toString(inputAr));
-
-        //System.out.println("");
-        //Build max heap
-//        System.out.println("Before build: " + Arrays.toString(inputAr));
-//        build_MaxHeap(inputAr);
-//        System.out.println("After build: " + Arrays.toString(inputAr));
-
-        //Sort an array using max_heapify
-
         //Part A:
         //Heap sort run time section
         long startTime = System.nanoTime();
@@ -115,6 +101,13 @@ public class lab5src {
         long selectionTime = endTime - startTime;
         System.out.println("Average run time selection: " + selectionTime + " nanosecond");
 
+        if (heapSortTime < selectionTime) {
+            System.out.println("Heap sort runs faster");
+        }
+        else {
+            System.out.println("Selection sort runs faster");
+        }
+
         //Part B:
         int[] a = new int[10];
         for (int i = 0; i < a.length; i++){
@@ -130,9 +123,6 @@ public class lab5src {
         int left = 2 * i + 1;
         int right = 2 * i + 2;
 
-//        System.out.println("Max: " + max);
-//        System.out.println("left: " + left);
-//        System.out.println("right: " + right);
         //Check to see if left child exist and compare with max value
         if((left < rightBound) && (a[max] < a[left])){
             max = left;
@@ -156,7 +146,7 @@ public class lab5src {
     public static void heap_Sort(int[] a){
         build_MaxHeap(a);
 
-        for(int i = a.length - 1; i > 0; i--){
+        for(int i = a.length - 1; i > 0; i--){          //Only call sort on the unsorted part of the array
             swap(a, 0, i);
             max_heapify(a, 0, i);       //Keep calling max heapify on the root to sort
         }
