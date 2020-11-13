@@ -81,12 +81,13 @@ public class lab5src {
             user_ar[i] = ThreadLocalRandom.current().nextInt(-100, 101);
         }
 
-        int[] inputAr = user_ar;
+        int[] inputAr = ta1;
 
         //Part A:
         //Heap sort run time section
         long startTime = System.nanoTime();
         heap_Sort(inputAr);
+        System.out.println("After heap sort: " + Arrays.toString(inputAr));
         long endTime = System.nanoTime();
         long heapSortTime = endTime - startTime;
         System.out.println("Average run time heap sort: " + heapSortTime + " nanosecond");
@@ -145,7 +146,7 @@ public class lab5src {
 
     public static void heap_Sort(int[] a){
         build_MaxHeap(a);
-
+        System.out.println("Array after build: " + Arrays.toString(a));
         for(int i = a.length - 1; i > 0; i--){          //Only call sort on the unsorted part of the array
             swap(a, 0, i);
             max_heapify(a, 0, i);       //Keep calling max heapify on the root to sort
