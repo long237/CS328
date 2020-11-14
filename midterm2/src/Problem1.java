@@ -32,7 +32,31 @@ public class Problem1 {
         ta3[4] = 2;
         ta3[5] = 1;
 
-        int[] inputar = ta2;
+        int[] ta4 = new int[10];        //for building sorting
+        ta4[0] = 87;
+        ta4[1] = 21;
+        ta4[2] = 0;
+        ta4[3] = -1;
+        ta4[4] = -22;
+        ta4[5] = 10;
+        ta4[6] = 17;
+        ta4[7] = 11;
+        ta4[8] = -3;
+        ta4[9] = 10;
+
+        int[] ta5 = new int[9];
+        ta5[0] = 60;
+        ta5[1] = 50;
+        ta5[2] = 55;
+        ta5[3] = 45;
+        ta5[4] = 20;
+        ta5[5] = 10;
+        ta5[6] = 2;
+        ta5[7] = 5;
+        ta5[8] = 36;
+
+
+        int[] inputar = ta5;
         System.out.println("Input arrays: " + Arrays.toString(inputar));
         System.out.println("Compare " + inputar[1]);
         boolean result = parent_comp(inputar, 1);
@@ -63,7 +87,7 @@ public class Problem1 {
         int last_Intern = (a.length) / 2 - 1;
         for (int i = last_Intern; i >= 0; i--) {
             boolean result = parent_comp(a, i);
-            if (result == false){
+            if (!result){
                 return false;
             }
         }
