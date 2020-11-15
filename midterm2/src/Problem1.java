@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Problem1 {
 
@@ -55,8 +56,15 @@ public class Problem1 {
         ta5[7] = 5;
         ta5[8] = 36;
 
+        int ranSize = ThreadLocalRandom.current().nextInt(1,20);
+        int[] ranAr = new int[ranSize];
+        for (int i = 0; i < ranAr.length; i++){
+            ranAr[i] =ThreadLocalRandom.current().nextInt(-100, 101);
+        }
+        System.out.println("Random array: " + Arrays.toString(ranAr));
+        System.out.println("");
 
-        int[] inputar = ta5;
+        int[] inputar = ranAr;
         System.out.println("Input arrays: " + Arrays.toString(inputar));
         System.out.println("Compare " + inputar[1]);
         boolean result = parent_comp(inputar, 1);
@@ -71,8 +79,6 @@ public class Problem1 {
         int left = 2 * i + 1;
         int right = 2 * i + 2;
 
-        System.out.println("Left ele: " + left);
-        System.out.println("Right ele: " + right);
         if ((left < a.length) && (a[max] < a[left])){
             return false;
         }
