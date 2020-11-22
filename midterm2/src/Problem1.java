@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Problem1 {
 
     public static void main(String[] args) {
-        int[] ta1 = new int[7];
+        double[] ta1 = new double[7];
         ta1[0] = 6;
         ta1[1] = 0;
         ta1[2] = 2;
@@ -13,7 +13,7 @@ public class Problem1 {
         ta1[5] = 1;
         ta1[6] = 0;
 
-        int[] ta2 = new int[10];
+        double[] ta2 = new double[10];
         ta2[0] = 100;
         ta2[1] = 50;
         ta2[2] = 60;
@@ -25,7 +25,7 @@ public class Problem1 {
         ta2[8] = 36;
         ta2[9] = 2;
 
-        int[] ta3 = new int[6];
+        double[] ta3 = new double[6];
         ta3[0] = 10;
         ta3[1] = 8;
         ta3[2] = 7;
@@ -33,7 +33,7 @@ public class Problem1 {
         ta3[4] = 2;
         ta3[5] = 1;
 
-        int[] ta4 = new int[10];        //for building sorting
+        double[] ta4 = new double[10];        //for building sorting
         ta4[0] = 87;
         ta4[1] = 21;
         ta4[2] = 0;
@@ -45,7 +45,7 @@ public class Problem1 {
         ta4[8] = -3;
         ta4[9] = 10;
 
-        int[] ta5 = new int[9];
+        double[] ta5 = new double[9];
         ta5[0] = 60;
         ta5[1] = 50;
         ta5[2] = 55;
@@ -56,25 +56,22 @@ public class Problem1 {
         ta5[7] = 5;
         ta5[8] = 36;
 
-        int ranSize = ThreadLocalRandom.current().nextInt(1,20);
-        int[] ranAr = new int[ranSize];
-        for (int i = 0; i < ranAr.length; i++){
-            ranAr[i] =ThreadLocalRandom.current().nextInt(-100, 101);
-        }
-        System.out.println("Random array: " + Arrays.toString(ranAr));
-        System.out.println("");
+//        int ranSize = ThreadLocalRandom.current().nextInt(1,20);
+//        int[] ranAr = new int[ranSize];
+//        for (int i = 0; i < ranAr.length; i++){
+//            ranAr[i] =ThreadLocalRandom.current().nextInt(-100, 101);
+//        }
+//        System.out.println("Random array: " + Arrays.toString(ranAr));
+//        System.out.println("");
 
-        int[] inputar = ranAr;
-        System.out.println("Input arrays: " + Arrays.toString(inputar));
-        System.out.println("Compare " + inputar[1]);
-        boolean result = parent_comp(inputar, 1);
-        System.out.println("Result: " + result);
+        double[] inputar = ta2;
+        System.out.println("Input array: " + Arrays.toString(inputar));
         boolean check = Is_MaxHeap(inputar);
-        System.out.println("Max heap check result: " + check);
+        System.out.println("Max-heap check result: " + check);
 
     }
 
-    public static boolean parent_comp(int[] a, int i){
+    public static boolean parent_comp(double[] a, int i){       //Compare the parent with left and right child
         int max = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -89,10 +86,10 @@ public class Problem1 {
         return true;
     }
 
-    public static boolean Is_MaxHeap(int[] a){
+    public static boolean Is_MaxHeap(double[] a){
         int last_Intern = (a.length) / 2 - 1;
-        for (int i = last_Intern; i >= 0; i--) {
-            boolean result = parent_comp(a, i);
+        for (int i = last_Intern; i >= 0; i--) {        //Iterate from last internal node to root
+            boolean result = parent_comp(a, i);         //Compare all internal node with its children
             if (!result){
                 return false;
             }
