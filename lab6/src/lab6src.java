@@ -56,6 +56,9 @@ public class lab6src {
         }
         selection_Sort(Sright, 1);
         System.out.println("Sright array: " + Arrays.toString(Sright));
+
+        double MPSSmid = MPSS_mid(inputar, 0, inputar.length - 1);
+        System.out.println("MPSS mid value: " + MPSSmid);
     }
 
     public static double MPSS (double[] a, int start, int end) {
@@ -79,7 +82,7 @@ public class lab6src {
             temp += a[i];
             Sleft[i] = temp;
         }
-        System.out.println("Sleft array: " + Arrays.toString(Sleft));
+
 
         temp = 0;
         int r_index = 0;
@@ -88,13 +91,15 @@ public class lab6src {
             Sright[r_index] = temp;
             r_index++;
         }
-        System.out.println("Sright array: " + Arrays.toString(Sright));
+
 
 
         //Sort ascending order
         selection_Sort(Sleft, 0);
+        System.out.println("Sleft array: " + Arrays.toString(Sleft));
         //Sort descending order
         selection_Sort(Sright, 1);
+        System.out.println("Sright array: " + Arrays.toString(Sright));
 
         int i = 0;      //Sleft
         int j = 0;      //Sright
@@ -104,7 +109,12 @@ public class lab6src {
             double s = Sleft[i] + Sright[j];
             if (s <= 0) {
                 i++;
-            } else if (s < Smin) {
+            }
+            else if (s < Smin) {
+                Smin = s;
+                j++;
+            }
+            else if (s > Smin) {
                 j++;
             }
         }
