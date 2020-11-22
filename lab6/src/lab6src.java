@@ -24,13 +24,19 @@ public class lab6src {
         ta1[6] = -54;
         ta1[7] = 63;
 
+        double[] ta2 = new double[4];        //for building sorting
+        ta2[0] = 1.2;
+        ta2[1] = -2;
+        ta2[2] = 2.5;
+        ta2[3] = 1;
+
         double[] inputar = ta4;
 
         System.out.println("Input array: " + Arrays.toString(inputar));
-        //selection_Sort(inputar, 0);
-        //System.out.println("Array after sort: " + Arrays.toString(inputar));
-        //selection_Sort(inputar, 1);
-        //System.out.println("Descending: " + Arrays.toString(inputar));
+//        selection_Sort(inputar, 0);
+//        System.out.println("Array after sort: " + Arrays.toString(inputar));
+//        selection_Sort(inputar, 1);
+//        System.out.println("Descending: " + Arrays.toString(inputar));
 
         int start = 0;
         int end = inputar.length - 1;
@@ -40,9 +46,15 @@ public class lab6src {
         double[] Sright = new double[end - (mid + 1) + 1];
 
         double temp = 0;
-        for (int i = mid; i >= 0; i--) {
+//        for (int i = mid; i >= start; i--) {
+//            temp += inputar[i];
+//            Sleft[i] = temp;
+//        }
+        int l_index = 0;
+        for (int i = mid ; i >= start; i--) {
             temp += inputar[i];
-            Sleft[i] = temp;
+            Sleft[l_index] = temp;
+            l_index++;
         }
         selection_Sort(Sleft, 0);
         System.out.println("Sleft array: " + Arrays.toString(Sleft));
@@ -57,18 +69,27 @@ public class lab6src {
         selection_Sort(Sright, 1);
         System.out.println("Sright array: " + Arrays.toString(Sright));
 
-        double MPSSmid = MPSS_mid(inputar, 0, inputar.length - 1);
-        System.out.println("MPSS mid value: " + MPSSmid);
+        //double MPSSmid = MPSS_mid(inputar, 0, inputar.length - 1);
+        //System.out.println("MPSS mid value: " + MPSSmid);
+
+//        double MPSSvalue = MPSS(inputar, 0, inputar.length - 1);
+//        System.out.println("MPSS value: " + MPSSvalue);
     }
 
     public static double MPSS (double[] a, int start, int end) {
-        if (a.length > 1){
+        if (start != end){
             int mid = (start + end) / 2;
             double MPSS_L = MPSS(a, start, mid);
             double MPSS_R = MPSS(a, mid + 1, end);
-
+            double MPSS_mid = MPSS_mid(a, start, end);
+            return Math.min(MPSS_mid, Math.min(MPSS_L, MPSS_R));
         }
-        return -1;
+        else if (start == end) {
+            return a[0];
+        }
+        else {
+            return -222;
+        }
     }
 
     public static double MPSS_mid(double[] a, int start, int end) {
@@ -78,11 +99,12 @@ public class lab6src {
         double[] Sright = new double[end - (mid + 1) + 1];
 
         double temp = 0;
-        for (int i = mid; i >= 0; i--) {
+        int l_index = 0;
+        for (int i = mid ; i >= start; i--) {
             temp += a[i];
-            Sleft[i] = temp;
+            Sleft[l_index] = temp;
+            l_index++;
         }
-
 
         temp = 0;
         int r_index = 0;
@@ -91,8 +113,6 @@ public class lab6src {
             Sright[r_index] = temp;
             r_index++;
         }
-
-
 
         //Sort ascending order
         selection_Sort(Sleft, 0);
