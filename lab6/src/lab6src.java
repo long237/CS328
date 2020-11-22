@@ -92,27 +92,24 @@ public class lab6src {
 
 
         //Sort ascending order
-        selection_Sort(Sleft, 1);
+        selection_Sort(Sleft, 0);
         //Sort descending order
-        selection_Sort(Sright, 0);
+        selection_Sort(Sright, 1);
 
         int i = 0;      //Sleft
         int j = 0;      //Sright
         double Smin = Double.POSITIVE_INFINITY;
 
-        while (i < Sleft.length) {
-            while (j < Sright.length) {
-                double s = Sleft[i] + Sright[j];
-                if (s <= 0) {
-                    i++;
-                }
-                else if (s < Smin) {
-                    j++;
-                }
+        while (i < Sleft.length && j < Sright.length) {
+            double s = Sleft[i] + Sright[j];
+            if (s <= 0) {
+                i++;
+            } else if (s < Smin) {
+                j++;
             }
         }
 
-        return -1;
+        return Smin;
     }
 
     public static void selection_Sort(double[] a, int order) {
