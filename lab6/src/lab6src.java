@@ -30,6 +30,13 @@ public class lab6src {
         ta2[2] = 2.5;
         ta2[3] = 1;
 
+        double[] ta3 = new double[2];
+        ta3[0] = 2.5;
+        ta3[1] = 1.0;
+
+        double[] ta5 = new double[1];
+        ta5[0] = 1;
+
         double[] inputar = ta4;
 
         System.out.println("Input array: " + Arrays.toString(inputar));
@@ -50,30 +57,30 @@ public class lab6src {
 //            temp += inputar[i];
 //            Sleft[i] = temp;
 //        }
-        int l_index = 0;
-        for (int i = mid ; i >= start; i--) {
-            temp += inputar[i];
-            Sleft[l_index] = temp;
-            l_index++;
-        }
-        selection_Sort(Sleft, 0);
-        System.out.println("Sleft array: " + Arrays.toString(Sleft));
+//        int l_index = 0;
+//        for (int i = mid ; i >= start; i--) {
+//            temp += inputar[i];
+//            Sleft[l_index] = temp;
+//            l_index++;
+//        }
+//        selection_Sort(Sleft, 0);
+//        //System.out.println("Sleft array: " + Arrays.toString(Sleft));
+//
+//        temp = 0;
+//        int r_index = 0;
+//        for (int i = mid + 1; i < inputar.length; i++) {
+//            temp += inputar[i];
+//            Sright[r_index] = temp;
+//            r_index++;
+//        }
+//        selection_Sort(Sright, 1);
+        //System.out.println("Sright array: " + Arrays.toString(Sright));
 
-        temp = 0;
-        int r_index = 0;
-        for (int i = mid + 1; i < inputar.length; i++) {
-            temp += inputar[i];
-            Sright[r_index] = temp;
-            r_index++;
-        }
-        selection_Sort(Sright, 1);
-        System.out.println("Sright array: " + Arrays.toString(Sright));
+//        double MPSSmid = MPSS_mid(inputar, 0, inputar.length - 1);
+//        System.out.println("MPSS mid value: " + MPSSmid);
 
-        //double MPSSmid = MPSS_mid(inputar, 0, inputar.length - 1);
-        //System.out.println("MPSS mid value: " + MPSSmid);
-
-//        double MPSSvalue = MPSS(inputar, 0, inputar.length - 1);
-//        System.out.println("MPSS value: " + MPSSvalue);
+        double MPSSvalue = MPSS(inputar, 0, inputar.length - 1);
+        System.out.println("MPSS value: " + MPSSvalue);
     }
 
     public static double MPSS (double[] a, int start, int end) {
@@ -108,7 +115,7 @@ public class lab6src {
 
         temp = 0;
         int r_index = 0;
-        for (int i = mid + 1; i < a.length; i++) {
+        for (int i = mid + 1; i <= end; i++) {
             temp += a[i];
             Sright[r_index] = temp;
             r_index++;
