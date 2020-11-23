@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class lab6src {
     public static void main(String[] args) {
@@ -37,50 +39,21 @@ public class lab6src {
         double[] ta5 = new double[1];
         ta5[0] = 1;
 
-        double[] inputar = ta4;
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input an array size: ");
+        int user_size = scanner.nextInt();
+        double[] user_ar = new double[user_size];
+
+        for (int i = 0; i < user_ar.length; i++) {
+            user_ar[i] = ThreadLocalRandom.current().nextDouble(-20, 20);
+        }
+
+
+        double[] inputar = user_ar;
         System.out.println("Input array: " + Arrays.toString(inputar));
-//        selection_Sort(inputar, 0);
-//        System.out.println("Array after sort: " + Arrays.toString(inputar));
-//        selection_Sort(inputar, 1);
-//        System.out.println("Descending: " + Arrays.toString(inputar));
-
-        int start = 0;
-        int end = inputar.length - 1;
-        int mid = (start + end) / 2;
-
-        double[] Sleft = new double[mid - start + 1];
-        double[] Sright = new double[end - (mid + 1) + 1];
-
-        double temp = 0;
-//        for (int i = mid; i >= start; i--) {
-//            temp += inputar[i];
-//            Sleft[i] = temp;
-//        }
-//        int l_index = 0;
-//        for (int i = mid ; i >= start; i--) {
-//            temp += inputar[i];
-//            Sleft[l_index] = temp;
-//            l_index++;
-//        }
-//        selection_Sort(Sleft, 0);
-//        //System.out.println("Sleft array: " + Arrays.toString(Sleft));
-//
-//        temp = 0;
-//        int r_index = 0;
-//        for (int i = mid + 1; i < inputar.length; i++) {
-//            temp += inputar[i];
-//            Sright[r_index] = temp;
-//            r_index++;
-//        }
-//        selection_Sort(Sright, 1);
-        //System.out.println("Sright array: " + Arrays.toString(Sright));
-
-//        double MPSSmid = MPSS_mid(inputar, 0, inputar.length - 1);
-//        System.out.println("MPSS mid value: " + MPSSmid);
-
         double MPSSvalue = MPSS(inputar, 0, inputar.length - 1);
-        System.out.println("MPSS value: " + MPSSvalue);
+        System.out.printf("MPSS value: %.2f", MPSSvalue);
     }
 
     public static double MPSS (double[] a, int start, int end) {
@@ -123,10 +96,10 @@ public class lab6src {
 
         //Sort ascending order
         selection_Sort(Sleft, 0);
-        System.out.println("Sleft array: " + Arrays.toString(Sleft));
+        //System.out.println("Sleft array: " + Arrays.toString(Sleft));
         //Sort descending order
         selection_Sort(Sright, 1);
-        System.out.println("Sright array: " + Arrays.toString(Sright));
+        //System.out.println("Sright array: " + Arrays.toString(Sright));
 
         int i = 0;      //Sleft
         int j = 0;      //Sright
