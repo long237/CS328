@@ -32,13 +32,23 @@ public class lab6src {
         ta2[2] = 2.5;
         ta2[3] = 1;
 
-        double[] ta3 = new double[2];
-        ta3[0] = 2.5;
-        ta3[1] = 1.0;
+        double[] ta3 = new double[7];
+        ta3[0] = -1.37;
+        ta3[1] = -7.13;
+        ta3[2] = 9.77;
+        ta3[3] = -7.05;
+        ta3[4] = 11.54;
+        ta3[5] = 3.82;
+        ta3[6] = 19.23;
 
         double[] ta5 = new double[1];
         ta5[0] = 1;
 
+        double[] ta6 = new double[4];
+        ta6[0] = -14.7;
+        ta6[1] = -7.63;
+        ta6[2] = 4.6;
+        ta6[3] = -2.92;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input an array size: ");
@@ -50,10 +60,13 @@ public class lab6src {
         }
 
 
-        double[] inputar = user_ar;
+        double[] inputar = ta3;
         System.out.println("Input array: " + Arrays.toString(inputar));
         double MPSSvalue = MPSS(inputar, 0, inputar.length - 1);
         System.out.printf("MPSS value: %.2f", MPSSvalue);
+        System.out.println("");
+        double viv = mpssMiddle(inputar, 0, inputar.length - 1);
+        System.out.println("Viv value: " + viv);
     }
 
     public static double MPSS (double[] a, int start, int end) {
@@ -65,7 +78,12 @@ public class lab6src {
             return Math.min(MPSS_mid, Math.min(MPSS_L, MPSS_R));
         }
         else if (start == end) {
-            return a[0];
+            if ( a[start] >= 0){
+                return a[start];
+            }
+            else {
+                return Double.POSITIVE_INFINITY;
+            }
         }
         else {
             return -222;
@@ -96,10 +114,10 @@ public class lab6src {
 
         //Sort ascending order
         selection_Sort(Sleft, 0);
-        //System.out.println("Sleft array: " + Arrays.toString(Sleft));
+        System.out.println("Sleft array: " + Arrays.toString(Sleft));
         //Sort descending order
         selection_Sort(Sright, 1);
-        //System.out.println("Sright array: " + Arrays.toString(Sright));
+        System.out.println("Sright array: " + Arrays.toString(Sright));
 
         int i = 0;      //Sleft
         int j = 0;      //Sright
@@ -153,5 +171,68 @@ public class lab6src {
         double prevE1 = a[e1];
         a[e1] = a[e2];
         a[e2] = prevE1;
+    }
+
+    public static double mpssMiddle(double arr[], int start, int end) {
+        int size = arr.length;
+        int subsequenceSumLength = size / 2;
+
+        double sl[] = new double[subsequenceSumLength];
+        double sr[];
+
+        if (size % 2 == 1) { //Calculating the length of Sr depending on odd or even input
+            sr = new double[subsequenceSumLength + 1];
+        }
+        else {
+            sr = new double[subsequenceSumLength];
+        }
+
+        double sumLeft = 0;
+        int leftCounter = sl.length - 1;
+        for (int i = subsequenceSumLength; i > start; i--) { //Filling Sl with left half of array
+            sumLeft += arr[i];
+            sl[leftCounter--] += sumLeft;
+            //leftCounter--;
+        }
+//        int left = 0;
+//        for (int i = subsequenceSumLength; i >= start; i--) { //Filling Sr with right half of array
+//            sumLeft += arr[i];
+//            sr[left--] += sumLeft;
+//            //left--;
+//        }
+
+        int rightCounter = 0;
+        double sumRight = 0;
+        for (int i = subsequenceSumLength + 1; i <= end; i++) { //Filling Sr with right half of array
+            sumRight += arr[i];
+            sr[rightCounter++] += sumRight;
+            //rightCounter++;
+        }
+
+        selection_Sort(sl,0);
+        selection_Sort(sr,1);
+
+        double Smin = Double.POSITIVE_INFINITY;
+
+        double mpss;
+        int i = 0;
+        int j = 0;
+
+        while (i != sl.length && j < sr.length) { //Keeps running while iterators are less than the length
+            double sum = sl[i] + sr[j];
+
+            if (sum <= 0) {
+                i++;
+            }
+            else if (sum < Smin) {
+                Smin = sum;
+                j++;
+            }
+            else {
+                j++;
+            }
+        }
+        mpss = Smin;
+        return mpss;
     }
 }
