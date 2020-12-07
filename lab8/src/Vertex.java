@@ -59,7 +59,7 @@ public class Vertex {
                 v.parent = v;
                 DFS_visit(v,sortedList);
             }
-            //System.out.println("Vertex " + v.getData() + " start: " + v.getStart() + " end: " + v.getEnd());
+            System.out.println("Vertex " + v.getData() + " start: " + v.getStart() + " end: " + v.getEnd());
         }
     }
 
@@ -80,7 +80,6 @@ public class Vertex {
         vertex.end = time;
         sortedList.add(vertex);
     }
-
 
     public static void printSorted(LinkedList<Vertex> vList){
         for (int i = vList.size() - 1; i >= 0; i--){
