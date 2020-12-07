@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Stack;
 
 public class Vertex {
     public static int time = 0;
@@ -22,6 +24,18 @@ public class Vertex {
         parent = null;
     }
 
+    public String getData() {
+        return data;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
     public void addNeighbor(Vertex vertex){
         neighborList.add(vertex);
     }
@@ -39,29 +53,39 @@ public class Vertex {
         return data;
     }
 
-    public static void DFS(ArrayList<Vertex> Vlist){
+    public static void DFS(ArrayList<Vertex> Vlist, LinkedList<Vertex> sortedList){
         for(Vertex v : Vlist){
             if(v.parent == null){
                 v.parent = v;
-                DFS_visit(v);
+                DFS_visit(v,sortedList);
             }
+            //System.out.println("Vertex " + v.getData() + " start: " + v.getStart() + " end: " + v.getEnd());
         }
     }
 
-    public static void DFS_visit(Vertex vertex){
+    public static void DFS_visit(Vertex vertex, LinkedList<Vertex> sortedList){
         time++;
         vertex.start = time;
         ArrayList<Vertex> neighborList = vertex.getNeighborList();
         for(Vertex neighbor : neighborList){
             if(neighbor.parent == null){
                 neighbor.parent = vertex;
-                DFS_visit(neighbor);
+                DFS_visit(neighbor, sortedList);
             }
             else if (neighbor.end == -1){
-                System.out.println("Cycle found");
+                System.out.println("Cycle found, topological sort is impossible");
             }
         }
-        vertex.end = time++;
+        time++;
+        vertex.end = time;
+        sortedList.add(vertex);
+    }
+
+
+    public static void printSorted(LinkedList<Vertex> vList){
+        for (int i = vList.size() - 1; i >= 0; i--){
+            System.out.println(vList.get(i));
+        }
     }
 
     public static void main(String[] args) {
@@ -84,8 +108,53 @@ public class Vertex {
         a.addNeighbor(c);
         a.addNeighbor(d);
 
+        //Add b neighbor
         b.addNeighbor(d);
 
+        //Add c neighbor
         c.addNeighbor(d);
+
+        //Add d neighbor
+        d.addNeighbor(e);
+
+        //Add e neighbor
+        e.addNeighbor(g);
+
+        //Add f neighbor
+        f.addNeighbor(e);
+
+        graphG1.add(a);
+        graphG1.add(b);
+        graphG1.add(c);
+        graphG1.add(d);
+        graphG1.add(e);
+        graphG1.add(f);
+        graphG1.add(g);
+
+
+        System.out.print("a neighbor: ");
+        a.printNeighbor();
+        System.out.print("b neighbor: ");
+        b.printNeighbor();
+        System.out.print("c neighbor: ");
+        c.printNeighbor();
+        System.out.print("d neighbor: ");
+        d.printNeighbor();
+        System.out.print("e neighbor: ");
+        e.printNeighbor();
+        System.out.print("f neighbor: ");
+        f.printNeighbor();
+        System.out.print("g neighbor: ");
+        g.printNeighbor();
+
+        LinkedList<Vertex> sortedList = new LinkedList<Vertex>();
+        Stack<Vertex> sortedStack = new Stack<Vertex>();
+
+        System.out.println("Input array G1: " + graphG1);
+        DFS(graphG1, sortedList);
+        System.out.println(sortedList);
+        System.out.println("Sorted order: ");
+        printSorted(sortedList);
+
     }
 }
