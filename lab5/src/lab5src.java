@@ -86,7 +86,8 @@ public class lab5src {
         //Part A:
         //Heap sort run time section
         long startTime = System.nanoTime();
-        heap_Sort(inputAr);
+        System.out.println("Input Array: " + Arrays.toString(inputAr));
+        heap_Sort(inputAr);;
         System.out.println("After heap sort: " + Arrays.toString(inputAr));
         long endTime = System.nanoTime();
         long heapSortTime = endTime - startTime;
