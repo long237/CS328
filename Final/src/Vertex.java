@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 public class Vertex {
     String data;
@@ -28,6 +29,8 @@ public class Vertex {
         this.cost = cost;
     }
 
+
+
     Vertex(){
         data = "hello world";
         neighborList = new ArrayList<>();
@@ -35,13 +38,24 @@ public class Vertex {
         parent = null;
     }
 
+    public Vertex(int x_pos, int y_pos) {
+        this.x_pos = x_pos;
+        this.y_pos = y_pos;
+        cost = Double.POSITIVE_INFINITY;
+    }
+
     public double getCost() {
         return cost;
     }
 
+//    @Override
+//    public String toString(){
+//        return data + " cost: " + cost;
+//    }
+
     @Override
     public String toString(){
-        return data + " cost: " + cost;
+        return "(" + x_pos + "," + y_pos + ")" + " " + "cost: " + this.cost;
     }
 
     public static void Prim(ArrayList<Vertex> allVertices){
@@ -65,6 +79,16 @@ public class Vertex {
                 }
             }
         }
+
+        System.out.println("Prim completed");
+    }
+
+    public static double CalCost(ArrayList<Vertex> allVlist){
+        double cost = 0;
+        for (Vertex v : allVlist){
+            cost = cost + v.cost;
+        }
+        return cost;
     }
 
     public static Vertex findMin(ArrayList<Vertex> arrayList){
@@ -78,8 +102,8 @@ public class Vertex {
     }
 
     public static double Weight(Vertex from, Vertex to){
-         double distance = Math.sqrt(Math.pow(from.x_pos - to.x_pos, 2) + Math.pow(from.y_pos - to.y_pos, 2));
-         return distance;
+        double distance = Math.sqrt(Math.pow(from.x_pos - to.x_pos, 2) + Math.pow(from.y_pos - to.y_pos, 2));
+        return distance;
     }
 
     public static void printPath(Vertex destination){
@@ -90,10 +114,31 @@ public class Vertex {
         System.out.println(destination);
     }
 
-    public static void main(String[] args) {
-        Vertex a = new Vertex("a",0,0);
+    public static void printMatrix(int[][] matrix){
+        System.out.println("[ ");
+        for (int r = 0; r < matrix.length; r++){
+            for (int c = 0; c < matrix[c].length; c++){
+                System.out.print(matrix[r][c] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("]");
+    }
+
+    public static ArrayList<Vertex> maToVertices(int[][] matrix) {
+        ArrayList<Vertex> allVList = new ArrayList<>();
+        for (int r = 0; r < matrix.length; r++) {
+            for (int c = 0; c < matrix[c].length - 1; c++) {
+                allVList.add(new Vertex(matrix[r][c], matrix[r][c + 1]));
+            }
+        }
+        return allVList;
+    }
+
+    public static void main (String[]args){
+        Vertex a = new Vertex("a", 0, 0);
         Vertex b = new Vertex("b", 3, 1);
-        Vertex c = new Vertex("c", 1,2);
+        Vertex c = new Vertex("c", 1, 2);
         Vertex d = new Vertex("d", 4, 4);
         Vertex e = new Vertex("e", 5, 5);
 
@@ -108,11 +153,11 @@ public class Vertex {
 
         System.out.println(allVlist);
 
-        Vertex x = new Vertex("x",2,0);
-        Vertex y = new Vertex("y",0,0);
-        Vertex z = new Vertex("z",0,1);
-        Vertex j = new Vertex("j",4,3);
-        Vertex k = new Vertex("k",3,0);
+        Vertex x = new Vertex("x", 2, 0);
+        Vertex y = new Vertex("y", 0, 0);
+        Vertex z = new Vertex("z", 0, 1);
+        Vertex j = new Vertex("j", 4, 3);
+        Vertex k = new Vertex("k", 3, 0);
 
         ArrayList<Vertex> graph2 = new ArrayList<>();
         graph2.add(x);
@@ -131,6 +176,7 @@ public class Vertex {
         Prim(allVlist);
         System.out.println("Path from d: ");
         printPath(d);
+        System.out.println("Minimum budget for all buildings: " + CalCost(allVlist));
 
         System.out.println();
         System.out.println("Graph 2: " + graph2);
@@ -138,8 +184,46 @@ public class Vertex {
         Prim(graph2);
         System.out.println("Path from j: ");
         printPath(j);
+        printPath(z);
         System.out.println("y parent: " + y.parent);
         System.out.println("z parent: " + z.parent);
         System.out.println("cost of z: " + z.cost);
+        System.out.println("Minimum budget for all buildings for graph 2: " + CalCost(graph2));
+
+        int[][] building = new int[4][2];
+        System.out.println("Buildings coor: " + Arrays.toString(building));
+        building[1][0] = 1;
+        building[1][1] = 2;
+        building[2][0] = 3;
+        building[2][1] = 1;
+        building[3][0] = 4;
+        building[3][1] = 4;
+        printMatrix(building);
+
+        ArrayList<Vertex> graph1Test = maToVertices(building);
+        System.out.println("Conversion Arraylist: " + graph1Test);
+        System.out.println("Element 3: " + graph1Test.get(3));
+        Prim(graph1Test);
+        printPath(graph1Test.get(3));
+
+
+        int[][] building2 = new int[5][2];
+        building2[1][0] = 0;
+        building2[1][1] = 1;
+        building2[2][0] = 2;
+        building2[2][1] = 0;
+        building2[3][0] = 3;
+        building2[3][1] = 0;
+        building2[4][0] = 4;
+        building2[4][1] = 3;
+
+
+        System.out.println();
+        ArrayList<Vertex> graph2Test = maToVertices(building2);
+        System.out.println("Conversion Arraylist 2 : " + graph2Test);
+        Prim(graph2Test);
+        printPath(graph2Test.get(1));
+        printPath(graph2Test.get(4));
+        System.out.println("Minimum budget for all buildings: " + CalCost(graph2Test));
     }
 }
