@@ -2,6 +2,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+/*Problem 2 is in this file */
 public class Vertex {
     String data;
     ArrayList<Vertex> neighborList = new ArrayList<Vertex>();
@@ -125,10 +127,20 @@ public class Vertex {
         System.out.println("]");
     }
 
+//    public static ArrayList<Vertex> maToVertices(int[][] matrix) {
+//        ArrayList<Vertex> allVList = new ArrayList<>();
+//        for (int r = 0; r < matrix.length; r++) {
+//            for (int c = 0; c < matrix[c].length - 1; c++) {
+//                allVList.add(new Vertex(matrix[r][c], matrix[r][c + 1]));
+//            }
+//        }
+//        return allVList;
+//    }
+
     public static ArrayList<Vertex> maToVertices(int[][] matrix) {
         ArrayList<Vertex> allVList = new ArrayList<>();
         for (int r = 0; r < matrix.length; r++) {
-            for (int c = 0; c < matrix[c].length - 1; c++) {
+            for (int c = 0; c < matrix[r].length - 1; c++) {
                 allVList.add(new Vertex(matrix[r][c], matrix[r][c + 1]));
             }
         }
@@ -225,5 +237,11 @@ public class Vertex {
         printPath(graph2Test.get(1));
         printPath(graph2Test.get(4));
         System.out.println("Minimum budget for all buildings: " + CalCost(graph2Test));
+
+        int m = 2;
+        int n = m;
+        m++;
+        System.out.println("m value: " + m);
+        System.out.println("n value: " + n);
     }
 }
