@@ -47,30 +47,4 @@ public class Node {
         return "(" + x_pos + "," + y_pos + ")" + " " + "data: " + data;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.data;
-        hash = 53 * hash + this.x_pos;
-        hash = 53 * hash + this.y_pos;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null){
-            return false;
-        }
-        if (obj.getClass() != this.getClass()){
-            return false;
-        }
-        Node other = (Node) obj;
-        if (this.x_pos != other.x_pos || this.y_pos != other.y_pos){
-            return false;
-        }
-        if (this.data != other.data){
-            return false;
-        }
-        return true;
-    }
 }

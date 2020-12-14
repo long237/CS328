@@ -3,54 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Problem3 {
-//    static class Node{
-//        int data;
-//        ArrayList<Vertex> neighborList = new ArrayList<Vertex>();
-//        int x_pos;
-//        int y_pos;
-//        double cost;
-//        Node parent = null;
-//
-//        // Constructor
-//        Node(int d, int x_pos, int y_pos) {
-//            data = d;
-//            parent = null;
-//            neighborList = new ArrayList<Vertex>();
-//            this.x_pos = x_pos;
-//            this.y_pos = y_pos;
-//            cost = Double.POSITIVE_INFINITY;
-//        }
-//
-//        Node(int d, int x_pos, int y_pos, double cost) {
-//            data = d;
-//            parent = null;
-//            neighborList = new ArrayList<Vertex>();
-//            this.x_pos = x_pos;
-//            this.y_pos = y_pos;
-//            this.cost = cost;
-//        }
-//
-//
-//
-//        Node(){
-//            data = -1;
-//            neighborList = new ArrayList<>();
-//            cost = 0;
-//            parent = null;
-//        }
-//
-//        public Node(int x_pos, int y_pos) {
-//            this.x_pos = x_pos;
-//            this.y_pos = y_pos;
-//            cost = Double.POSITIVE_INFINITY;
-//        }
-//
-//        @Override
-//        public String toString(){
-//            return "(" + x_pos + "," + y_pos + ")" + " " + "data: " + data;
-//        }
-//    }
-//
     public static ArrayList<Node> matrixConversion(int[][] matrix) {
         ArrayList<Node> allVList = new ArrayList<>();
         for (int r = 0; r < matrix.length; r++) {
@@ -104,21 +56,6 @@ public class Problem3 {
         }
         return false;
     }
-
-//    public static int countComp(ArrayList<Node> inputar){
-//        ArrayList<Node> group = new ArrayList<>();
-//        for (Node node : inputar){
-//            if (node.data == 1) {
-//                Node parent = node.parent;
-//                for (Node compGroup : group) {
-//                    if (parent != null && !isEqual(parent, compGroup)) {
-//                        group.add(parent);
-//                    }
-//                }
-//            }
-//        }
-//        return group.size();
-//    }
 
     public static int countComp(ArrayList<Node> inputar){
         int num_comp = 0;
