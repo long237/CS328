@@ -64,7 +64,7 @@ public class Problem3 {
     public static void findComponent(ArrayList<Node> inputar, int[][] matrixDirection, int[][] inputMa){
         for (Node node : inputar){
             if (node.data == 1 && node.parent == null){
-                System.out.println("Execute if");
+                //System.out.println("Execute if");
                 node.parent = node;
                 for (int r = 0; r < matrixDirection.length; r++){
                     for (int c = 0; c < matrixDirection[r].length - 1; c++){
@@ -157,6 +157,25 @@ public class Problem3 {
         m[3][2] = 0;
         m[3][3] = 0;
 
+        int[][] m2 = new int[3][5];
+        m2[0][0] = 1;
+        m2[0][1] = 1;
+        m2[0][2] = 1;
+        m2[0][3] = 0;
+        m2[0][4] = 1;
+        m2[1][0] = 1;
+        m2[1][1] = 0;
+        m2[1][2] = 0;
+        m2[1][3] = 0;
+        m2[1][4] = 0;
+        m2[2][0] = 0;
+        m2[2][1] = 0;
+        m2[2][2] = 1;
+        m2[2][3] = 1;
+        m2[2][4] = 0;
+
+
+
         int[][] matrixDirection = new int[8][2];
         matrixDirection[0][0] = -1;
         matrixDirection[0][1] = -1;
@@ -177,23 +196,11 @@ public class Problem3 {
 
 
 
-        System.out.println("Input matrix: " + Arrays.deepToString(m));
+        System.out.println("Input matrix 1: " + Arrays.deepToString(m));
         ArrayList<Node> inputMa = matrixConversion(m);
         System.out.println("ArrayList of Node: " + inputMa);
-        System.out.println("first row: " + Arrays.toString(m[0]));
-
-        System.out.println("Direction matrix: ");
-        System.out.println(Arrays.deepToString(matrixDirection));
-
-        System.out.println("x = 3 is: " + inBound(m, 3, 3));
-
-        System.out.println("Node x = 1 y = 2: " + findNode(inputMa, 1, 2));
-        System.out.println();
 
         findComponent(inputMa, matrixDirection, m);
-        System.out.println("ArrayList of Node after finding comp: ");
-        System.out.println(inputMa);
-        System.out.println("Node x = 0; y = 2 parent: " + inputMa.get(1).parent);
 
         for (Node n : inputMa){
             System.out.println("Node " + n + " parent: " + n.parent);
@@ -201,6 +208,19 @@ public class Problem3 {
 
         System.out.println();
         System.out.println("Number of components are: " + countComp(inputMa));
+
+        /**Matrix 2 here: **/
+        System.out.println();
+        System.out.println("Matrix 2: " + Arrays.deepToString(m2));
+        ArrayList<Node> inputMa2 = matrixConversion(m2);
+        System.out.println("ArrayList 2: " + inputMa2);
+        findComponent(inputMa2, matrixDirection, m2);
+        for (Node n : inputMa2){
+            System.out.println("Node " + n + " parent: " + n.parent);
+        }
+        System.out.println();
+        System.out.println("Number of components for 2 are: " + countComp(inputMa2));
+
 
 
     }
